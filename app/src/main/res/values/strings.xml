@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Gif Searcher</string>
+    <string name="search_bar">Search</string>
+    <string name="date">Date: </string>
+    <string name="user">User: </string>
+    <string name="rating">Rating: </string>
+    <string name="description">Description: </string>
+    <string name="get_error_message">An error occured. Please, try again. </string>
+</resources>
