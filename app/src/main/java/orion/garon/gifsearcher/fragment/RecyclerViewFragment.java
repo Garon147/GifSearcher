@@ -1,12 +1,13 @@
 package orion.garon.gifsearcher.fragment;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,7 +46,34 @@ public class RecyclerViewFragment extends Fragment {
     private GifList gifList = new GifList();
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        final View view = inflater.inflate(R.layout.main_screen, container, false);
+        ButterKnife.bind(this, view);
+
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(getActivity(), recyclerView,
+                new RecyclerViewItemClickListener.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(View view, int position) {
+
+                        Intent intent = new Intent(getActivity(), GifActivity.class);
+                        intent.putExtra(GifActivity.GifFragment.GIF_PARSED, gifList.getData().get(position));
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {}
+                }));
+
+        return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         GifMethods gifMethods = GifMethods.retrofit.create(GifMethods.class);
         retrofit2.Call<GifList> gifListCall = gifMethods.gifs();
@@ -65,36 +93,7 @@ public class RecyclerViewFragment extends Fragment {
                 Toast.makeText(getActivity(), R.string.get_error_message, Toast.LENGTH_LONG).show();
             }
         });
-
         setHasOptionsMenu(true);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-
-        final View view = inflater.inflate(R.layout.main_screen, container, false);
-        ButterKnife.bind(this, view);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(getActivity(), recyclerView,
-                new RecyclerViewItemClickListener.OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(View view, int position) {
-
-                        Intent intent = new Intent(getActivity(), GifActivity.class);
-//                        intent.putExtra(GifFragment.GIF_PARSED, gifList.getData().get(position));
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onLongItemClick(View view, int position) {}
-                }));
-
-        return view;
     }
 
     @Override

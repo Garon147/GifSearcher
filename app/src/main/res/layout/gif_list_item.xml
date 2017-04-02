@@ -51,7 +51,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/username">
+            android:layout_below="@+id/username_list">
 
             <TextView
                 android:id="@+id/date_and_time_list"
