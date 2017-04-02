@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import java.util.List;
@@ -42,13 +43,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(PersonViewHolder holder, int position) {
+    public void onBindViewHolder(final PersonViewHolder holder, int position) {
 
         Gif gif = gifs.get(position);
 
-        Ion.with(context).load(gif.getImages().getOriginal().getUrl()).
-                intoImageView(holder.gifImageList);
-        holder.gifProgressBarList.setVisibility(View.INVISIBLE);
+        Ion.with(context).load(gif.getImages().getOriginal().getUrl()).progressBar(holder.gifProgressBarList).
+                intoImageView(holder.gifImageList).setCallback(new FutureCallback<ImageView>() {
+            @Override
+            public void onCompleted(Exception e, ImageView result) {
+                holder.gifProgressBarList.setVisibility(View.GONE);
+            }
+        });
         holder.gifUsernameList.setText(gif.getUsername());
         holder.gifDateTimeList.setText(gif.getImportDatetime());
     }

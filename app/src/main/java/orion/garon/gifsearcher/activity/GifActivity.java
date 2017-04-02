@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.ProgressCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,17 +40,25 @@ public class GifActivity extends BaseActivity {
         public static final String GIF_PARSED = "GIF";
 
         private Gif gif;
+        private boolean flag = false;
 
         @BindView(R.id.gif_username)
         TextView gifUsername;
+
         @BindView(R.id.gif_date)
         TextView gifDate;
+
         @BindView(R.id.gif_description)
         TextView gifDescription;
+
         @BindView(R.id.gif_rating)
         TextView gifRating;
+
         @BindView(R.id.gif_image)
         ImageView gifImage;
+
+        @BindView(R.id.progress_bar_gif)
+        ProgressBar gifProgressBar;
 
         public static GifFragment newInstance(Gif gif) {
 
@@ -71,8 +82,14 @@ public class GifActivity extends BaseActivity {
             gifDescription.setText(getString(R.string.description) + " " + "GIF");
             gifRating.setText(getString(R.string.rating) + " " + gif.getRating());
 
-            Ion.with(getActivity()).load(gif.getImages().getOriginal().getUrl()).
-                    intoImageView(gifImage);
+            Ion.with(getActivity()).load(gif.getImages().getOriginal().getUrl()).progressBar(gifProgressBar).
+                    intoImageView(gifImage).
+            setCallback(new FutureCallback<ImageView>() {
+                @Override
+                public void onCompleted(Exception e, ImageView result) {
+                    gifProgressBar.setVisibility(View.GONE);
+                }
+            });
 
             return view;
         }
