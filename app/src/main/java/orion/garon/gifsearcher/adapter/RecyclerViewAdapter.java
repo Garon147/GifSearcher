@@ -1,6 +1,7 @@
 package orion.garon.gifsearcher.adapter;
 
 import android.content.Context;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +18,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import orion.garon.gifsearcher.R;
+import orion.garon.gifsearcher.activity.OnBackPressedListener;
 import orion.garon.gifsearcher.rest.data.Gif;
 
 /**
  * Created by VKI on 02.04.2017.
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.PersonViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.PersonViewHolder>  {
 
     private Context context;
     private List<Gif> gifs;
@@ -63,7 +65,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return gifs.size();
     }
 
-    public static class PersonViewHolder extends RecyclerView.ViewHolder {
+    public static class PersonViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.gif_image_list)
         ImageView gifImageList;
@@ -82,5 +84,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(item);
             ButterKnife.bind(this, item);
         }
+
     }
 }

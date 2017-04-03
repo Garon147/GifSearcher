@@ -21,6 +21,14 @@
 
         <activity android:name=".activity.GifActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.QueryActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="query"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

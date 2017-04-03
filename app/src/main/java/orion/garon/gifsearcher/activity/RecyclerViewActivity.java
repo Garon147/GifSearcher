@@ -3,6 +3,8 @@ package orion.garon.gifsearcher.activity;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
+import java.util.List;
+
 import orion.garon.gifsearcher.fragment.RecyclerViewFragment;
 
 /**
@@ -15,4 +17,6 @@ public class RecyclerViewActivity extends BaseActivity {
     protected Fragment createFragment() {
         return new RecyclerViewFragment();
     }
+
+
 }

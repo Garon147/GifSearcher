@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
@@ -16,6 +17,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.RecyclerView;
+import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,6 +28,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import orion.garon.gifsearcher.R;
 import orion.garon.gifsearcher.activity.GifActivity;
+import orion.garon.gifsearcher.activity.OnBackPressedListener;
+import orion.garon.gifsearcher.activity.QueryActivity;
 import orion.garon.gifsearcher.adapter.RecyclerViewAdapter;
 import orion.garon.gifsearcher.adapter.RecyclerViewItemClickListener;
 import orion.garon.gifsearcher.rest.GifMethods;
@@ -37,13 +42,18 @@ import retrofit2.Response;
  * Created by VKI on 02.04.2017.
  */
 
-public class RecyclerViewFragment extends Fragment {
+public class RecyclerViewFragment extends Fragment{
+
+
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
     RecyclerViewAdapter recyclerViewAdapter;
 
     private GifList gifList = new GifList();
+
+    private List<Gif> fullList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -94,12 +104,14 @@ public class RecyclerViewFragment extends Fragment {
             }
         });
         setHasOptionsMenu(true);
+
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
         inflater.inflate(R.menu.menu, menu);
+
 
         final MenuItem menuItem = menu.findItem(R.id.search_bar);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
@@ -108,7 +120,14 @@ public class RecyclerViewFragment extends Fragment {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+
+                Intent intent = new Intent("query");
+                intent.putExtra("query", query);
+                GifList filter = new GifList();
+                filter.setData(fullList);
+                intent.putExtra("gifList", filter);
+                startActivity(intent);
+                return true;
             }
 
             @Override
@@ -116,21 +135,23 @@ public class RecyclerViewFragment extends Fragment {
 
                 newText.toLowerCase();
 
-                final List<Gif> list = new ArrayList<>();
+                fullList = new ArrayList<>();
 
                 for(int i = 0;i < gifList.getData().size();i++) {
 
                     final String text = gifList.getData().get(i).getUsername().toLowerCase();
                     if(text.contains(newText)) {
 
-                        list.add(gifList.getData().get(i));
+                        fullList.add(gifList.getData().get(i));
                     }
                 }
 
-                recyclerViewAdapter = new RecyclerViewAdapter(getContext(), list);
+                recyclerViewAdapter = new RecyclerViewAdapter(getContext(), fullList);
                 recyclerView.setAdapter(recyclerViewAdapter);
                 return true;
             }
         });
     }
+
+
 }
