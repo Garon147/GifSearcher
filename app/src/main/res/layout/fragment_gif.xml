@@ -37,7 +37,7 @@
             android:textStyle="italic"/>
 
         <TextView
-            android:id="@+id/gif_username"
+            android:id="@+id/gif_rating"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:textStyle="bold"
@@ -45,24 +45,14 @@
             android:text="ABCDEF"/>
 
         <TextView
-            android:id="@+id/gif_rating"
+            android:id="@+id/gif_username"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:text="ABCD"
             android:textStyle="bold"
             android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/gif_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="AHSDAKSDKJAHSJKDJKASJKDAJSHDAHJKSHDJKAHJKHDKJAHSJKDKALDA;KSD;LASKLDJKAJDKASKLJDKLJASD"
-            android:textStyle="normal"
-            android:textSize="14sp"/>
-
     </LinearLayout>
-
-
 
 </LinearLayout>
 

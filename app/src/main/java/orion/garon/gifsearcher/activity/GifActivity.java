@@ -40,16 +40,12 @@ public class GifActivity extends BaseActivity {
         public static final String GIF_PARSED = "GIF";
 
         private Gif gif;
-        private boolean flag = false;
 
         @BindView(R.id.gif_username)
         TextView gifUsername;
 
         @BindView(R.id.gif_date)
         TextView gifDate;
-
-        @BindView(R.id.gif_description)
-        TextView gifDescription;
 
         @BindView(R.id.gif_rating)
         TextView gifRating;
@@ -77,9 +73,8 @@ public class GifActivity extends BaseActivity {
 
             gif = getArguments().getParcelable(GIF_PARSED);
 
-            gifUsername.setText(getString(R.string.user) + " " + gif.getUsername());
+            gifUsername.setText(gif.getUsername());
             gifDate.setText(getString(R.string.date) + " " + gif.getImportDatetime());
-            gifDescription.setText(getString(R.string.description) + " " + "GIF");
             gifRating.setText(getString(R.string.rating) + " " + gif.getRating());
 
             Ion.with(getActivity()).load(gif.getImages().getOriginal().getUrl()).progressBar(gifProgressBar).
