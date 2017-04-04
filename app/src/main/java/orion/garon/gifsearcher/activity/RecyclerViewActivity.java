@@ -15,6 +15,7 @@ public class RecyclerViewActivity extends BaseActivity {
 
     @Override
     protected Fragment createFragment() {
+
         return new RecyclerViewFragment();
     }
 
