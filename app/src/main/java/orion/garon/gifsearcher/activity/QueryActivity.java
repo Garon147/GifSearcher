@@ -30,10 +30,13 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.recyclerViewQuery)
     RecyclerView recyclerViewQuery;
 
+    RecyclerView recyclerView;
+
     @BindView(R.id.checkbox_rating)
     CheckBox checkBoxRating;
 
     RecyclerViewAdapter recyclerViewAdapterQuery;
+    RecyclerViewAdapter recyclerViewAdapter;
 
     private Intent intent;
 
@@ -48,7 +51,10 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
         intent = getIntent();
         setTitle(intent.getStringExtra("query"));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this);
         recyclerViewQuery.setLayoutManager(linearLayoutManager);
+        recyclerView = recyclerViewQuery;
+        recyclerView.setLayoutManager(linearLayoutManager1);
 
         Bundle data = intent.getExtras();
         gifList = (GifList) data.getParcelable("gifList");
@@ -79,15 +85,19 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
                     gifs.add(element);
                 }
             }
+            recyclerView = recyclerViewQuery;
+            setClickListener(recyclerView, gifs);
+            recyclerViewAdapter = new RecyclerViewAdapter(this, gifs);
+            recyclerView.setAdapter(recyclerViewAdapter);
+            recyclerViewQuery = null;
 
-            setClickListener(recyclerViewQuery, gifs);
-            recyclerViewAdapterQuery = new RecyclerViewAdapter(this, gifs);
-            recyclerViewQuery.setAdapter(recyclerViewAdapterQuery);
-            
         } else {
+
+            recyclerViewQuery = recyclerView;
 
             recyclerViewAdapterQuery = new RecyclerViewAdapter(this, gifList.getData());
             recyclerViewQuery.setAdapter(recyclerViewAdapterQuery);
+            recyclerView = null;
 
         }
 
