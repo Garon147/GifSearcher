@@ -3,6 +3,7 @@
     <string name="search_bar">Search</string>
     <string name="date">Date: </string>
     <string name="rating">Rating: </string>
+    <string name="user">User: </string>
     <string name="get_error_message">An error occured. Please, try again. </string>
     <string name="show_friendly">Show only family friendly gifs</string>
 </resources>

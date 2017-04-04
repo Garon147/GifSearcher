@@ -51,10 +51,8 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
         intent = getIntent();
         setTitle(intent.getStringExtra("query"));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this);
+
         recyclerViewQuery.setLayoutManager(linearLayoutManager);
-        recyclerView = recyclerViewQuery;
-        recyclerView.setLayoutManager(linearLayoutManager1);
 
         Bundle data = intent.getExtras();
         gifList = (GifList) data.getParcelable("gifList");
@@ -85,26 +83,20 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
                     gifs.add(element);
                 }
             }
-            recyclerView = recyclerViewQuery;
-            setClickListener(recyclerView, gifs);
-            recyclerViewAdapter = new RecyclerViewAdapter(this, gifs);
-            recyclerView.setAdapter(recyclerViewAdapter);
-            recyclerViewQuery = null;
+
+            recyclerViewAdapterQuery = new RecyclerViewAdapter(this, gifs);
+            recyclerViewQuery.setAdapter(recyclerViewAdapterQuery);
 
         } else {
 
-            recyclerViewQuery = recyclerView;
-
             recyclerViewAdapterQuery = new RecyclerViewAdapter(this, gifList.getData());
             recyclerViewQuery.setAdapter(recyclerViewAdapterQuery);
-            recyclerView = null;
-
         }
 
     }
 
     public void setClickListener(RecyclerView recyclerView, final List<Gif> sortedList){
-            recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(this, recyclerViewQuery,
+            recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(this, recyclerView,
                     new RecyclerViewItemClickListener.OnItemClickListener() {
 
                         @Override

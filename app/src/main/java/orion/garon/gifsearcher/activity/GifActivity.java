@@ -76,7 +76,10 @@ public class GifActivity extends BaseActivity {
 
             gif = getArguments().getParcelable(GIF_PARSED);
 
-            gifUsername.setText(gif.getUsername());
+            if(gif.getUsername().equals("")) {
+                gifUsername.setVisibility(View.GONE);
+            }
+            gifUsername.setText(getString(R.string.user) + " " + gif.getUsername());
             gifDate.setText(getString(R.string.date) + " " + gif.getImportDatetime());
             gifRating.setText(getString(R.string.rating) + " " + gif.getRating());
 

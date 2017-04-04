@@ -57,7 +57,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 holder.gifProgressBarList.setVisibility(View.GONE);
             }
         });
+
         holder.gifUsernameList.setText(gif.getUsername());
+        holder.gifRatingList.setText(context.getString(R.string.rating) + " " + gif.getRating());
         holder.gifDateTimeList.setText(gif.getImportDatetime());
     }
 
@@ -79,6 +81,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         @BindView(R.id.username_list)
         TextView gifUsernameList;
+
+        @BindView(R.id.rating_list)
+        TextView gifRatingList;
 
         public PersonViewHolder(View item) {
 
