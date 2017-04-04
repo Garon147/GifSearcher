@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -17,7 +18,6 @@ import orion.garon.gifsearcher.R;
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract Fragment createFragment();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             fragment = createFragment();
             fragmentManager.beginTransaction().replace(R.id.container, fragment).commitNow();
         }
+
     }
 
     @Override

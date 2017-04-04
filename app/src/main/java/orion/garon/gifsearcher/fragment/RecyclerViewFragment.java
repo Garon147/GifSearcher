@@ -44,8 +44,6 @@ import retrofit2.Response;
 
 public class RecyclerViewFragment extends Fragment{
 
-
-
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 

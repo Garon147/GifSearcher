@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,7 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
 
         checkBoxRating.setOnClickListener(this);
 
+        setClickListener(recyclerViewQuery, gifList.getData());
 
 
     }
@@ -73,21 +75,20 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
             for(int i=0;i<gifList.getData().size();i++) {
                 rating = gifList.getData().get(i).getRating();
                 element = gifList.getData().get(i);
-                if(rating.equals("pg") /*|| rating.equals("g") || rating.equals("y")*/){
+                if(rating.equals("pg") || rating.equals("g") || rating.equals("y")){
                     gifs.add(element);
                 }
             }
 
-            recyclerViewAdapterQuery = new RecyclerViewAdapter(this, gifs);
-
-            recyclerViewQuery.setAdapter(recyclerViewAdapterQuery);
             setClickListener(recyclerViewQuery, gifs);
-
+            recyclerViewAdapterQuery = new RecyclerViewAdapter(this, gifs);
+            recyclerViewQuery.setAdapter(recyclerViewAdapterQuery);
+            
         } else {
 
             recyclerViewAdapterQuery = new RecyclerViewAdapter(this, gifList.getData());
             recyclerViewQuery.setAdapter(recyclerViewAdapterQuery);
-            setClickListener(recyclerViewQuery, gifList.getData());
+
         }
 
     }

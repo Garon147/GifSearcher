@@ -1,6 +1,7 @@
 package orion.garon.gifsearcher.activity;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -35,7 +37,7 @@ public class GifActivity extends BaseActivity {
         return gifFragment;
     }
 
-    public static class GifFragment extends Fragment {
+    public static class GifFragment extends Fragment{
 
         public static final String GIF_PARSED = "GIF";
 
@@ -62,6 +64,7 @@ public class GifActivity extends BaseActivity {
             bundle.putParcelable(GIF_PARSED, gif);
             GifFragment gifFragment = new GifFragment();
             gifFragment.setArguments(bundle);
+
             return gifFragment;
         }
 
@@ -89,4 +92,5 @@ public class GifActivity extends BaseActivity {
             return view;
         }
     }
+
 }
