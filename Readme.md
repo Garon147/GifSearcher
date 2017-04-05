@@ -20,5 +20,6 @@
 Changes applied to build.gradle file.
 
 1) Add this line in the dependencies block (after the "classpath 'com.android.tools.build:gradle:2.3.0'" line)
+    
     classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     
