@@ -1,4 +1,4 @@
-All changes must be applied to app/build.gradle file.
+Ñhanges applied to app/build.gradle file.
 
 1) Add this line to the beginning of the file (after the "apply plugin: 'com.android.application'" line).
     apply plugin: 'com.neenbedankt.android-apt'
@@ -16,4 +16,9 @@ All changes must be applied to app/build.gradle file.
     compile group: 'javax.annotation', name: 'jsr250-api', version: '1.0'
     compile 'com.android.support:recyclerview-v7:25.2.0'
     compile 'com.koushikdutta.ion:ion:2.+'
+
+Changes applied to build.gradle file.
+
+1) Add this line in the dependencies block (after the "classpath 'com.android.tools.build:gradle:2.3.0'" line)
+	classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     
