@@ -1,4 +1,4 @@
-Ñhanges applied to app/build.gradle file.
+Changes applied to app/build.gradle file.
 
 1) Add this line to the beginning of the file (after the "apply plugin: 'com.android.application'" line).
     apply plugin: 'com.neenbedankt.android-apt'
