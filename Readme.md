@@ -1,11 +1,13 @@
 Changes applied to app/build.gradle file.
 
 1) Add this line to the beginning of the file (after the "apply plugin: 'com.android.application'" line).
+    
     apply plugin: 'com.neenbedankt.android-apt'
 
 2) Change targetSdkVersion to 24.
 
 3) Clear the dependencies block and paste this into it.
+    
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.2.0'
