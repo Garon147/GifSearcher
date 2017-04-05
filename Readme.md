@@ -1,4 +1,4 @@
-Ñhanges applied to app/build.gradle file.
+Ã‘hanges applied to app/build.gradle file.
 
 1) Add this line to the beginning of the file (after the "apply plugin: 'com.android.application'" line).
     apply plugin: 'com.neenbedankt.android-apt'
@@ -20,5 +20,5 @@
 Changes applied to build.gradle file.
 
 1) Add this line in the dependencies block (after the "classpath 'com.android.tools.build:gradle:2.3.0'" line)
-	classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     
